@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>showPlane</title>
+</head>
+<body>
+    <p>Welcome to the high skies</p>
+    <!-- add a new plane using this form -->
+    <form action="addPlane" method="post">{%csrf_token%}
+        <input type="text" name="name">
+        <input type="submit" value="Add">
+    </form>
+    <!-- show all the planes in a list -->
+    <ul>
+        {%for plane in allPlanes%}
+        <li>{{plane.name}}
+            <!-- delete button and post request for deleting a plane -->
+            <form action="deletePlane/{{plane.id}}" method="post">{%csrf_token%}
+                <input type="submit" value="Delete">
+            </form>
+            <!-- form and edit button to edit the plane entry -->
+            <form action="editPlane/{{plane.id}}" method="post">{%csrf_token%}
+                <input type="text" name="name" placeholder="{{plane.name}}">
+                <input type="submit" value="Edit">
+            </form>
+        </li>
+        {%endfor%}
+    </ul>
+
+
+</body>
+</html>
